@@ -13,6 +13,34 @@ Status
 ======
 This module is production-ready.
 
+Building as Dynamic Module on Ubuntu 20.04
+===========================
+1) Clone this repository just outside of the Nginx repo directory
+```
+git clone https://github.com/pupboss/ngx_cache_purge.git
+```
+2) Install build Essentials and Libraries
+```
+apt install gcc make libpcre3-dev libssl-dev zlib1g-dev libxml2 libxml2-dev libxslt-dev libgd-dev libgeoip-dev
+```
+3) Get your current configure arguments with `nginx -V`
+4) Navigate to your Nginx build directory and execute:
+```
+./configure xxx --add-dynamic-module=./ngx_cache_purge_dynamic --with-compat
+```
+
+5) Make modules
+```
+make modules
+```
+Your newly built module will be in `objs/ngx_http_cache_purge_module.so`
+
+6) Move it to /etc/nginx/modules/
+```
+sudo mv objs/ngx_http_cache_purge_module.so /etc/nginx/modules/
+```
+
+ALL DONE!
 
 Configuration directives (same location syntax)
 ===============================================
